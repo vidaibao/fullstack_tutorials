@@ -12,11 +12,11 @@ window.addEventListener('load', () => {
 
     nameInput.value = username;
 
-    nameInput.addEventListener('change', (e) => {
+    nameInput.addEventListener('change', e => {
         localStorage.setItem('username', e.target.value);
     });
 
-    newTodoForm.addEventListener('submit', (e) => {
+    newTodoForm.addEventListener('submit', e => {
         e.preventDefault();
 
         const todo = {
@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
         DisplayTodos();
     });
 
-    DisplayTodos();
+    DisplayTodos();//
 
 });
 
@@ -46,6 +46,23 @@ function  DisplayTodos () {
     todoList.innerHTML = '';
 
     todos.forEach(todo => {
+        /*
+        <div class="todo-item done">
+            <label>
+                <input type="checkbox">
+                <span class="bubble business"></span>
+            </label>
+
+            <div class="todo-content">
+                <input type="text" value="Make a video" readonly>
+            </div>
+
+            <div class="actions">
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+            </div>
+        </div>
+        */
         const todoItem = document.createElement('div');
         todoItem.classList.add('todo-item');
 
@@ -89,8 +106,9 @@ function  DisplayTodos () {
         if (todo.done) {
             todoItem.classList.add('done');
         }
+        
 
-        input.addEventListener('click',  (e) => {
+        input.addEventListener('click',  e => {
             todo.done = e.target.checked;
             localStorage.setItem('todos', JSON.stringify(todos));
 
@@ -104,11 +122,11 @@ function  DisplayTodos () {
             DisplayTodos();
         });
 
-        editButton.addEventListener('click', (e) => {
+        editButton.addEventListener('click', e => {
             const input = content.querySelector('input');
             input.removeAttribute('readonly');
             input.focus();
-            input.addEventListener('blur', (e) => {
+            input.addEventListener('blur', e => {
                 input.setAttribute('readonly', true);
                 todo.content = e.target.value;
                 localStorage.setItem('todos', JSON.stringify(todos));
